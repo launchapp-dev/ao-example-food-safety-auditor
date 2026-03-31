@@ -1,0 +1,193 @@
+{
+  "checklist_id": "CL-2026-03-25-001",
+  "facility_id": "main-facility",
+  "audit_type": "routine",
+  "generated_at": "2026-03-25T08:00:00Z",
+  "auditor": "System",
+  "items": [
+    {
+      "id": "RECV-001",
+      "zone": "receiving-dock",
+      "description": "Incoming refrigerated items temperature ≤ 4.4°C at time of receipt",
+      "critical_limit": "≤ 4.4°C",
+      "evidence_required": "Measure temperature of 3 random items from each refrigerated delivery",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "RECV-002",
+      "zone": "receiving-dock",
+      "description": "Supplier COAs (Certificates of Analysis) present for all high-risk items",
+      "critical_limit": null,
+      "evidence_required": "Review receiving logs for COA documentation",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "RECV-003",
+      "zone": "receiving-dock",
+      "description": "No damaged or compromised packaging accepted",
+      "critical_limit": null,
+      "evidence_required": "Visual inspection of packaging integrity",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "COLD-001",
+      "zone": "cold-storage",
+      "description": "Walk-in cooler temperature ≤ 4.4°C",
+      "critical_limit": "≤ 4.4°C",
+      "evidence_required": "Check digital thermometer display and datalogger reading",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "COLD-002",
+      "zone": "cold-storage",
+      "description": "Freezer temperature ≤ -17.8°C",
+      "critical_limit": "≤ -17.8°C",
+      "evidence_required": "Check digital thermometer display and datalogger reading",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "COLD-003",
+      "zone": "cold-storage",
+      "description": "FIFO (First In, First Out) rotation practiced — oldest stock front",
+      "critical_limit": null,
+      "evidence_required": "Check date labels on items; oldest should be accessible first",
+      "severity_if_failed": "minor"
+    },
+    {
+      "id": "COLD-004",
+      "zone": "cold-storage",
+      "description": "Temperature monitoring logs complete — entries ≤ 4 hours apart",
+      "critical_limit": "No gap > 4 hours",
+      "evidence_required": "Review HACCP-02 log for last 24 hours",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "DRY-001",
+      "zone": "dry-storage",
+      "description": "All items stored ≥ 15cm off floor",
+      "critical_limit": null,
+      "evidence_required": "Visual inspection — no items directly on floor",
+      "severity_if_failed": "minor"
+    },
+    {
+      "id": "DRY-002",
+      "zone": "dry-storage",
+      "description": "Chemicals stored separately from food items, in designated chemical storage area",
+      "critical_limit": null,
+      "evidence_required": "Visual confirmation of separation",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "DRY-003",
+      "zone": "dry-storage",
+      "description": "No evidence of pest activity (droppings, gnaw marks, nesting material)",
+      "critical_limit": null,
+      "evidence_required": "Visual inspection of all corners, shelving, and floor",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "PREP-001",
+      "zone": "prep-area",
+      "description": "Handwashing stations stocked (soap, paper towels, warm water)",
+      "critical_limit": null,
+      "evidence_required": "Check all 3 handwashing sinks — water temp, soap, towels",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "PREP-002",
+      "zone": "prep-area",
+      "description": "Color-coded cutting boards used correctly (no cross-contamination)",
+      "critical_limit": null,
+      "evidence_required": "Observe staff practices; red for raw meat, green for vegetables",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "PREP-003",
+      "zone": "prep-area",
+      "description": "3-compartment sink operational and sanitizer at correct concentration",
+      "critical_limit": "Sanitizer at 200 ppm chlorine or equivalent",
+      "evidence_required": "Test sanitizer with concentration strips",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "COOK-001",
+      "zone": "cooking-station",
+      "description": "CCP-COOK-TEMP: Poultry reaches minimum internal temperature 73.9°C",
+      "critical_limit": "≥ 73.9°C",
+      "evidence_required": "Review HACCP-01 log for all batches today; spot-check thermometer reading",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "COOK-002",
+      "zone": "cooking-station",
+      "description": "Cooking temperature log (HACCP-01) complete for all batches",
+      "critical_limit": "All batches documented",
+      "evidence_required": "Count log entries against batch records",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "COOK-003",
+      "zone": "cooking-station",
+      "description": "Thermometers calibrated within last 7 days",
+      "critical_limit": null,
+      "evidence_required": "Check calibration log and calibration date sticker on thermometers",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "COOL-001",
+      "zone": "cooling-area",
+      "description": "CCP-RAPID-COOL: Cooling log (HACCP-03) complete for all cooked products",
+      "critical_limit": "60°C → 21°C in 2h, 21°C → 4°C in 4h",
+      "evidence_required": "Review HACCP-03 for all batches; verify time/temp entries",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "COOL-002",
+      "zone": "cooling-area",
+      "description": "Blast chiller functioning — reaches -18°C blast temp",
+      "critical_limit": null,
+      "evidence_required": "Check blast chiller temperature display",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "PACK-001",
+      "zone": "packaging",
+      "description": "CCP-METAL-DETECT: Metal detector operational, test piece verification logged",
+      "critical_limit": "Test every 30 minutes with Fe 2mm, Non-Fe 2.5mm, SS 3mm test pieces",
+      "evidence_required": "Review HACCP-04 metal detector log",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "PACK-002",
+      "zone": "packaging",
+      "description": "Product labels accurate — ingredient list, allergens, date codes correct",
+      "critical_limit": null,
+      "evidence_required": "Check 5 random finished product labels against approved label spec",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "PACK-003",
+      "zone": "packaging",
+      "description": "Allergen-containing products segregated from allergen-free lines",
+      "critical_limit": null,
+      "evidence_required": "Visual inspection of production schedule and physical separation",
+      "severity_if_failed": "major"
+    },
+    {
+      "id": "SHIP-001",
+      "zone": "shipping-dock",
+      "description": "Outbound refrigerated product temperature ≤ 4.4°C before loading",
+      "critical_limit": "≤ 4.4°C",
+      "evidence_required": "Temperature check on random outbound cases",
+      "severity_if_failed": "critical"
+    },
+    {
+      "id": "SHIP-002",
+      "zone": "shipping-dock",
+      "description": "Transport vehicle pre-cooled before loading",
+      "critical_limit": "Vehicle ≤ 4.4°C before loading",
+      "evidence_required": "Check vehicle temperature log and visual inspection",
+      "severity_if_failed": "major"
+    }
+  ]
+}

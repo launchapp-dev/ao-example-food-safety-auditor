@@ -1,0 +1,25 @@
+---
+audit_schedules:
+  - facility_id: main-facility
+    audit_type: pre-op
+    workflow: daily-preop-check
+    cron: "0 5 * * *"
+    description: "Daily pre-operational check before 6 AM operations start"
+
+  - facility_id: main-facility
+    audit_type: routine
+    workflow: facility-audit
+    cron: "0 9 * * 2"
+    description: "Weekly routine facility audit every Tuesday at 9 AM"
+
+  - facility_id: main-facility
+    audit_type: comprehensive
+    workflow: facility-audit
+    cron: "0 9 1 * *"
+    description: "Monthly comprehensive audit on 1st of each month"
+    scope: comprehensive
+
+capa_followup:
+  workflow: corrective-action-followup
+  cron: "0 14 * * 3,5"
+  description: "CAPA status review Wednesday and Friday at 2 PM"

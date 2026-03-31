@@ -1,0 +1,295 @@
+phases:
+  # ─── facility-audit & daily-preop-check shared phases ───────────────────────
+
+  initialize-audit:
+    mode: command
+    command:
+      program: bash
+      args: ["-c", "bash scripts/init-audit.sh {{subject_title}}"]
+      cwd_mode: project_root
+      timeout_secs: 60
+
+  generate-checklist:
+    mode: agent
+    agent: checklist-generator
+    directive: |
+      Generate an audit checklist for the facility audit.
+
+      1. Read config/facility-profiles/main-facility.yaml for the facility profile
+      2. Read config/haccp-plans/general-food-processing.yaml for the HACCP plan
+      3. Read config/critical-limits.yaml for CCP temperature and time limits
+      4. Read config/audit-schedules.yaml to determine the current audit type
+
+      Generate a comprehensive checklist covering all zones in the facility profile.
+      Include CCP monitoring items with specific critical limits.
+      Save the checklist as: data/checklists/checklist-main-facility-{today's date}.json
+
+      Format each checklist item as:
+      {
+        "id": "ZONE-NNN",
+        "zone": "zone-name",
+        "description": "specific check description",
+        "critical_limit": "e.g., < 4°C" or null,
+        "evidence_required": "what to observe/measure/record",
+        "severity_if_failed": "critical|major|minor"
+      }
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  execute-audit:
+    mode: agent
+    agent: audit-executor
+    directive: |
+      Execute the facility audit by working through the checklist systematically.
+
+      1. Read the checklist from data/checklists/ (most recent file)
+      2. Read the sample audit data from data/sample-audit/ for reference scenarios
+      3. Read config/critical-limits.yaml for pass/fail criteria
+      4. For each checklist item, assign a rating: PASS, FAIL, OBSERVATION, or N/A
+      5. Document specific evidence for each rating
+
+      Use realistic food safety scenarios — include a mix of:
+      - Passing items (most items)
+      - A few minor issues (e.g., worn equipment still functional)
+      - At least 1-2 major findings (e.g., incomplete temperature log)
+      - Optionally 0-1 critical findings depending on audit scenario
+
+      Save findings as: data/findings/findings-main-facility-{today's date}.json
+
+      Format:
+      {
+        "checklist_item_id": "ZONE-NNN",
+        "rating": "PASS|FAIL|OBSERVATION|N/A",
+        "evidence": "specific observation documented here",
+        "notes": "additional context if needed"
+      }
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  classify-findings:
+    mode: agent
+    agent: finding-classifier
+    directive: |
+      Review all audit findings and make the official classification decision.
+
+      1. Read findings from data/findings/ (most recent file)
+      2. Read the original checklist from data/checklists/ for context
+      3. Apply classification rules strictly per your system prompt
+      4. Count findings by severity: critical, major, minor, observation, pass
+      5. Apply audit verdict rules to determine: pass, conditional-pass, or fail
+
+      Save your classification to: data/classifications/classified-main-facility-{today's date}.json
+
+      Then emit your decision_contract JSON with all required fields.
+    capabilities:
+      mutates_state: true
+      writes_files: true
+      requires_commit: false
+    decision_contract:
+      required_fields:
+        - verdict
+        - reasoning
+        - audit_result
+        - findings_summary
+        - total_items_audited
+        - critical_findings
+        - requires_immediate_action
+        - confidence
+
+  create-corrective-actions:
+    mode: agent
+    agent: corrective-action-writer
+    directive: |
+      Create corrective action plans (CAPAs) for all FAIL findings from the audit.
+
+      1. Read the classified findings from data/classifications/ (most recent file)
+      2. Read config/capa-templates.yaml for template guidance
+      3. For each FAIL or CRITICAL finding, create a CAPA with:
+         - Root cause analysis
+         - Immediate corrective action
+         - Preventive action
+         - Responsible party (e.g., "Floor Supervisor", "Quality Manager")
+         - Deadline (critical=24h, major=48h, minor=2 weeks from today)
+         - Verification method
+
+      4. Save CAPAs as: data/capas/capa-main-facility-{today's date}.json
+      5. Create a GitHub issue for each CAPA for tracking (use repository launchapp-dev/ao-example-food-safety-auditor)
+         - Title: "[CAPA] {finding description}"
+         - Labels: severity level, "capa", "food-safety"
+         - Body: full CAPA details
+
+      Store open CAPA IDs in memory for cross-run tracking.
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  generate-audit-report:
+    mode: agent
+    agent: compliance-reporter
+    directive: |
+      Generate the complete audit report.
+
+      1. Read classified findings from data/classifications/ (most recent)
+      2. Read CAPAs from data/capas/ (most recent)
+      3. Read audit history from data/ledger/audit-ledger.json for trends
+      4. Check memory for past audit results for trend analysis
+
+      Generate:
+      - output/reports/audit-main-facility-{today's date}.md (full report)
+      - output/certificates/cert-main-facility-{today's date}.md ONLY if audit_result was "pass"
+
+      The full report must include:
+      - Executive Summary (overall result, key numbers)
+      - Findings Table (all findings sorted by severity)
+      - CAPA Summary Table (open actions with deadlines)
+      - Trend Analysis (compare to past 3 audits)
+      - Recommendations
+      - Auditor Sign-off section
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  file-audit-record:
+    mode: command
+    command:
+      program: bash
+      args: ["-c", "bash scripts/file-record.sh {{subject_title}}"]
+      cwd_mode: project_root
+      timeout_secs: 60
+
+  # ─── daily-preop-check specific ─────────────────────────────────────────────
+
+  generate-preop-checklist:
+    mode: agent
+    agent: checklist-generator
+    directive: |
+      Generate a PRE-OPERATIONAL checklist — abbreviated, focused on sanitation and readiness before operations begin.
+
+      Pre-op checklist covers:
+      - Sanitation of food contact surfaces
+      - Equipment cleanliness and calibration
+      - Temperature monitoring (all refrigeration units)
+      - Personal hygiene (handwashing stations stocked, PPE available)
+      - Pest exclusion check
+      - Chemical storage and labeling
+      - Previous day's non-conformances resolved
+
+      Read config/facility-profiles/main-facility.yaml for zone list.
+      Save as: data/checklists/preop-checklist-main-facility-{today's date}.json
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  execute-preop-audit:
+    mode: agent
+    agent: audit-executor
+    directive: |
+      Execute the pre-operational audit rapidly. This must be completed before 6 AM operations begin.
+
+      Read the pre-op checklist from data/checklists/ (preop-checklist-main-facility-* file).
+      For each item: PASS or FAIL only (no OBSERVATION during pre-op — it's go/no-go).
+
+      Critical: any FAIL on a CCP item means immediate facility hold.
+
+      Save findings as: data/findings/preop-findings-main-facility-{today's date}.json
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  classify-preop-findings:
+    mode: agent
+    agent: finding-classifier
+    directive: |
+      Review pre-op findings and make the go/no-go decision for today's operations.
+
+      Read preop findings from data/findings/preop-findings-main-facility-*.
+
+      Pre-op specific rules:
+      - ANY failed sanitation item on food-contact surfaces → fail (operations hold)
+      - ANY temperature out of range → fail (operations hold)
+      - < 3 minor issues → conditional pass (document, fix within 2 hours)
+      - All pass → pass (clear for operations)
+
+      Emit decision_contract with your verdict.
+    capabilities:
+      mutates_state: false
+      writes_files: false
+    decision_contract:
+      required_fields:
+        - verdict
+        - reasoning
+        - audit_result
+        - findings_summary
+        - total_items_audited
+        - critical_findings
+        - requires_immediate_action
+        - confidence
+
+  generate-preop-report:
+    mode: agent
+    agent: compliance-reporter
+    directive: |
+      Generate the pre-op clearance report.
+
+      Read preop findings and classification from today's files.
+
+      Create output/reports/preop-main-facility-{today's date}.md with:
+      - CLEARANCE STATUS prominently at top (CLEARED FOR OPERATIONS / OPERATIONS HOLD)
+      - Failed items listed (if any)
+      - Time of audit
+      - Auditor initials
+
+      Keep it brief — this is a rapid daily check, not a full audit.
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  # ─── corrective-action-followup phases ──────────────────────────────────────
+
+  scan-open-actions:
+    mode: command
+    command:
+      program: bash
+      args: ["-c", "bash scripts/scan-open-capas.sh"]
+      cwd_mode: project_root
+      timeout_secs: 60
+
+  verify-remediation:
+    mode: agent
+    agent: corrective-action-writer
+    directive: |
+      Review all open CAPAs and verify which have been remediated.
+
+      1. Read data/capas/ for all CAPA files
+      2. Check memory for CAPA status history
+      3. Check GitHub issues labeled "capa" for closure status
+      4. For each open CAPA past its deadline:
+         - Check if evidence of completion has been documented
+         - Verify effectiveness of the corrective action
+         - Classify as: CLOSED, OVERDUE, or IN-PROGRESS
+
+      Output a verification report: data/capas/capa-status-{today's date}.json
+    capabilities:
+      mutates_state: true
+      writes_files: true
+
+  update-capa-status:
+    mode: agent
+    agent: compliance-reporter
+    directive: |
+      Update CAPA statuses and generate a follow-up report.
+
+      Read capa-status from data/capas/capa-status-{today's date}.json.
+
+      1. Close GitHub issues for verified CAPAs
+      2. Add overdue comments to past-deadline issues
+      3. Update memory with current CAPA statuses
+      4. Generate output/reports/capa-followup-{today's date}.md with:
+         - Closed CAPAs this week
+         - Overdue CAPAs requiring escalation
+         - Overall CAPA closure rate
+    capabilities:
+      mutates_state: true
+      writes_files: true

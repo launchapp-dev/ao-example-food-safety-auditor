@@ -1,0 +1,43 @@
+---
+# FDA Food Code Critical Limits for Common CCPs
+
+temperature_limits:
+  cold_storage:
+    refrigerator_max_celsius: 4.4      # 40°F
+    freezer_max_celsius: -17.8         # 0°F
+    unit: celsius
+  hot_holding:
+    minimum_celsius: 57.2              # 135°F
+  cooking:
+    poultry_minimum_celsius: 73.9      # 165°F
+    ground_beef_minimum_celsius: 68.3  # 155°F
+    fish_minimum_celsius: 62.8         # 145°F
+    pork_minimum_celsius: 62.8         # 145°F
+  cooling:
+    phase1_from_celsius: 60            # 140°F
+    phase1_to_celsius: 21.1            # 70°F
+    phase1_max_hours: 2
+    phase2_from_celsius: 21.1
+    phase2_to_celsius: 4.4             # 40°F
+    phase2_max_hours: 4
+  receiving:
+    refrigerated_max_celsius: 4.4
+    frozen_max_celsius: -17.8
+
+time_limits:
+  temperature_danger_zone:
+    max_hours: 4                        # Total time in 41°F-135°F range
+  cooling_total_max_hours: 6
+  hot_food_service_max_hours: 4
+
+ph_limits:
+  acidified_foods_max: 4.6             # pH at or below = acid inhibits pathogen growth
+  reduced_oxygen_packaging:
+    max_ph_for_extended_shelf: 4.6
+
+water_activity_limits:
+  shelf_stable_max: 0.85               # Aw at or below = shelf stable
+
+documentation_requirements:
+  temperature_log_max_gap_hours: 4     # Logs must be taken at least every 4 hours
+  ccp_monitoring_frequency: "per batch or every 4 hours, whichever is more frequent"

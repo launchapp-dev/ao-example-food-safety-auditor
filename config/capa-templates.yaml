@@ -1,0 +1,122 @@
+---
+# Corrective Action Plan (CAPA) Templates
+# Used by corrective-action-writer agent as starting points
+
+templates:
+  temperature-exceedance-critical:
+    finding_type: "Temperature out of critical limit range (CCP)"
+    severity: critical
+    deadline_hours: 24
+    root_cause_categories:
+      - Equipment malfunction
+      - Power outage
+      - Door seal failure
+      - Excessive door openings
+      - Overloaded unit
+    immediate_actions:
+      - "STOP: Remove all product from affected unit immediately"
+      - "Evaluate product safety — if in danger zone > 4 hours, DISCARD"
+      - "Move product to functioning unit if safe to do so"
+      - "Tag affected unit OUT OF SERVICE"
+      - "Contact refrigeration maintenance IMMEDIATELY"
+    preventive_actions:
+      - "Install continuous temperature monitoring alarm"
+      - "Establish equipment PM schedule"
+      - "Train staff on temperature monitoring frequency"
+    verification_method: "Refrigeration unit temperature stable for 48 hours post-repair, log review"
+
+  sanitation-failure:
+    finding_type: "Food contact surface not clean/sanitized"
+    severity: critical
+    deadline_hours: 24
+    root_cause_categories:
+      - Inadequate cleaning procedure
+      - Insufficient contact time for sanitizer
+      - Wrong sanitizer concentration
+      - Staff training gap
+      - Equipment design issue
+    immediate_actions:
+      - "HALT PRODUCTION on affected line"
+      - "Re-clean and re-sanitize all affected surfaces"
+      - "Verify sanitizer concentration with test strips"
+      - "Test surfaces with ATP swab before resuming production"
+    preventive_actions:
+      - "Review and update sanitation SOPs"
+      - "Conduct sanitation training for all affected staff"
+      - "Implement daily sanitation verification ATP testing"
+    verification_method: "ATP swab results < 100 RLU on food contact surfaces for 5 consecutive tests"
+
+  missing-temperature-log:
+    finding_type: "CCP temperature log missing or incomplete"
+    severity: major
+    deadline_hours: 48
+    root_cause_categories:
+      - Staff oversight
+      - Form not available
+      - Unclear responsibility
+      - High production volume
+    immediate_actions:
+      - "Complete retroactive documentation for any available records"
+      - "Notify QA Manager immediately"
+      - "Evaluate product risk based on available data (equipment alarms, visual)"
+    preventive_actions:
+      - "Assign dedicated logging responsibility per shift"
+      - "Install visual reminder at monitoring point"
+      - "Supervisor spot-check of logs daily"
+      - "Include log completion in shift handover checklist"
+    verification_method: "100% log completion verified by supervisor for 30 consecutive days"
+
+  allergen-control:
+    finding_type: "Allergen separation or labeling non-conformance"
+    severity: major
+    deadline_hours: 48
+    root_cause_categories:
+      - Shared equipment without adequate cleaning
+      - Incorrect label applied
+      - Scheduling allergen runs out of sequence
+      - Training gap
+    immediate_actions:
+      - "HOLD all potentially mislabeled product"
+      - "Conduct allergen review of all held product"
+      - "Contact customers if any affected product has shipped"
+      - "Discard product if allergen cross-contact cannot be excluded"
+    preventive_actions:
+      - "Schedule allergen-containing products at end of production runs"
+      - "Color-coded equipment for allergen vs. non-allergen use"
+      - "Label verification step at packaging"
+      - "Allergen awareness training quarterly"
+    verification_method: "No allergen deviations in 3 subsequent audits; label accuracy check 100% for 30 days"
+
+  equipment-maintenance:
+    finding_type: "Equipment not maintained or in poor repair"
+    severity: minor
+    deadline_hours: 336  # 2 weeks
+    root_cause_categories:
+      - Overdue PM
+      - Unreported damage
+      - Maintenance backlog
+    immediate_actions:
+      - "Tag equipment for repair/replacement"
+      - "Assess if equipment can continue to be used safely"
+      - "Work order submitted to maintenance"
+    preventive_actions:
+      - "Update equipment PM schedule"
+      - "Implement pre-shift equipment inspection"
+    verification_method: "Equipment PM completed, inspector sign-off on next audit"
+
+  documentation-gap:
+    finding_type: "Required documentation missing or incomplete (non-CCP)"
+    severity: minor
+    deadline_hours: 336  # 2 weeks
+    root_cause_categories:
+      - Form not available
+      - Staff training gap
+      - Process not documented
+    immediate_actions:
+      - "Locate or recreate documentation where possible"
+      - "Notify QA Manager"
+    preventive_actions:
+      - "Review documentation requirements with staff"
+      - "Make forms accessible at point of use"
+      - "Add documentation check to supervisor checklist"
+    verification_method: "Documentation complete and up-to-date on next audit"

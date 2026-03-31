@@ -1,0 +1,65 @@
+default_workflow_ref: facility-audit
+
+workflows:
+  - id: facility-audit
+    name: "Facility Audit"
+    description: "Full HACCP-based facility inspection: checklist generation, audit execution, finding classification, CAPA creation, and compliance report"
+    phases:
+      - initialize-audit
+      - generate-checklist
+      - execute-audit
+      - classify-findings:
+          on_verdict:
+            rework:
+              target: execute-audit
+            fail:
+              target: generate-checklist
+          max_rework_attempts: 2
+      - create-corrective-actions
+      - generate-audit-report
+      - file-audit-record
+    post_success:
+      merge:
+        strategy: squash
+        target_branch: main
+        create_pr: true
+        auto_merge: true
+        cleanup_worktree: true
+
+  - id: daily-preop-check
+    name: "Daily Pre-Op Check"
+    description: "Rapid pre-operational sanitation and readiness check before facility operations begin"
+    phases:
+      - initialize-audit
+      - generate-preop-checklist
+      - execute-preop-audit
+      - classify-preop-findings:
+          on_verdict:
+            fail:
+              target: generate-preop-checklist
+          max_rework_attempts: 1
+      - generate-preop-report
+      - file-audit-record
+    post_success:
+      merge:
+        strategy: squash
+        target_branch: main
+        create_pr: true
+        auto_merge: true
+        cleanup_worktree: true
+
+  - id: corrective-action-followup
+    name: "Corrective Action Follow-Up"
+    description: "Review open CAPAs, verify remediation, close completed items, escalate overdue actions"
+    phases:
+      - scan-open-actions
+      - verify-remediation
+      - update-capa-status
+      - file-audit-record
+    post_success:
+      merge:
+        strategy: squash
+        target_branch: main
+        create_pr: true
+        auto_merge: true
+        cleanup_worktree: true

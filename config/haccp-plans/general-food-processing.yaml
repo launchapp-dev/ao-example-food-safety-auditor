@@ -1,0 +1,147 @@
+---
+plan_id: general-food-processing
+name: "General Food Processing HACCP Plan"
+version: "2.1"
+last_reviewed: "2026-01-15"
+next_review: "2027-01-15"
+
+# HACCP Principle 1: Hazard Analysis
+hazard_analysis:
+  biological:
+    - hazard: "Salmonella, Campylobacter in raw poultry"
+      likelihood: high
+      severity: high
+      control_measure: "Cooking to 73.9°C internal temperature"
+    - hazard: "Listeria monocytogenes in ready-to-eat products"
+      likelihood: medium
+      severity: high
+      control_measure: "Sanitation program, environmental monitoring, physical separation"
+    - hazard: "E. coli O157:H7 in ground beef"
+      likelihood: medium
+      severity: high
+      control_measure: "Cooking to 68.3°C internal temperature"
+  chemical:
+    - hazard: "Allergen cross-contact"
+      likelihood: medium
+      severity: high
+      control_measure: "Allergen segregation, dedicated equipment, labeling controls"
+    - hazard: "Cleaning chemical residues"
+      likelihood: low
+      severity: medium
+      control_measure: "Rinse protocols, proper dilution, verification testing"
+  physical:
+    - hazard: "Metal fragments from equipment"
+      likelihood: low
+      severity: high
+      control_measure: "Metal detector at end of packaging line"
+
+# HACCP Principle 2: Critical Control Points
+critical_control_points:
+  - id: CCP-COOK-TEMP
+    name: "Cooking Temperature"
+    zone: cooking-station
+    hazard: "Salmonella, E. coli, Campylobacter"
+    # Principle 3: Critical Limits
+    critical_limit:
+      poultry_celsius: 73.9
+      ground_beef_celsius: 68.3
+      fish_celsius: 62.8
+    # Principle 4: Monitoring Procedures
+    monitoring:
+      method: "Calibrated stem thermometer inserted to thickest part"
+      frequency: "Every batch (minimum every 4 hours)"
+      responsible: "Line Supervisor"
+      record: "Cooking Temperature Log (Form HACCP-01)"
+    # Principle 5: Corrective Actions
+    corrective_actions:
+      - "Continue cooking until critical limit is reached"
+      - "Segregate and evaluate any product that did not reach critical limit"
+      - "Recalibrate thermometer if reading is suspect"
+      - "Document all corrective actions on HACCP-01"
+    # Principle 6: Verification
+    verification:
+      - "Supervisor review of HACCP-01 logs daily"
+      - "Thermometer calibration check weekly"
+      - "Third-party audit quarterly"
+
+  - id: CCP-COLD-STORAGE
+    name: "Cold Storage Temperature"
+    zone: cold-storage
+    hazard: "Bacterial growth (Listeria, Salmonella)"
+    critical_limit:
+      cooler_max_celsius: 4.4
+      freezer_max_celsius: -17.8
+    monitoring:
+      method: "Continuous datalogger + manual verification"
+      frequency: "Continuous (alarm if exceeded), manual check every 4 hours"
+      responsible: "Receiving/Storage Clerk"
+      record: "Cold Storage Temperature Log (Form HACCP-02)"
+    corrective_actions:
+      - "Identify and eliminate source of temperature exceedance"
+      - "Evaluate product safety if temperature exceeded for > 4 hours in danger zone"
+      - "Repair or replace refrigeration unit"
+      - "Document on HACCP-02 with duration of exceedance"
+    verification:
+      - "Datalogger download and review weekly"
+      - "Refrigeration unit PM quarterly"
+
+  - id: CCP-RAPID-COOL
+    name: "Rapid Cooling"
+    zone: cooling-area
+    hazard: "Bacterial growth during slow cooling"
+    critical_limit:
+      phase1: "60°C to 21°C within 2 hours"
+      phase2: "21°C to 4°C within 4 hours"
+      total_max_hours: 6
+    monitoring:
+      method: "Calibrated temperature probe in product geometric center"
+      frequency: "At start, at 2-hour mark, at end of cooling"
+      responsible: "Production Lead"
+      record: "Cooling Log (Form HACCP-03)"
+    corrective_actions:
+      - "Evaluate product if cooling was not achieved within time limits"
+      - "Discard if in temperature danger zone > 6 hours total"
+      - "Check blast chiller capacity and load size"
+    verification:
+      - "Cooling log review daily"
+      - "Blast chiller temperature verification monthly"
+
+  - id: CCP-METAL-DETECT
+    name: "Metal Detection"
+    zone: packaging
+    hazard: "Metal fragments in finished product"
+    critical_limit:
+      ferrous_mm: 2.0
+      non_ferrous_mm: 2.5
+      stainless_steel_mm: 3.0
+    monitoring:
+      method: "Automatic metal detector, sensitivity verified with test pieces"
+      frequency: "Every 30 minutes with calibration test pieces"
+      responsible: "Packaging Line Operator"
+      record: "Metal Detector Log (Form HACCP-04)"
+    corrective_actions:
+      - "Quarantine all product produced since last successful check"
+      - "Re-run quarantined product through metal detector"
+      - "Discard any product that triggers detector"
+      - "Investigate source of metal contamination"
+    verification:
+      - "Metal detector calibration log review weekly"
+      - "Third-party metal detector testing annually"
+
+# Principle 7: Record-Keeping System
+records:
+  forms:
+    - id: HACCP-01
+      name: "Cooking Temperature Log"
+      retention_years: 2
+    - id: HACCP-02
+      name: "Cold Storage Temperature Log"
+      retention_years: 2
+    - id: HACCP-03
+      name: "Cooling Log"
+      retention_years: 2
+    - id: HACCP-04
+      name: "Metal Detector Log"
+      retention_years: 2
+  digital_backup: true
+  backup_location: "data/ledger/"

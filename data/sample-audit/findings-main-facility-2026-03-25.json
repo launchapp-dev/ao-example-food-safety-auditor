@@ -1,0 +1,154 @@
+{
+  "findings_id": "FND-2026-03-25-001",
+  "checklist_id": "CL-2026-03-25-001",
+  "facility_id": "main-facility",
+  "audit_date": "2026-03-25",
+  "auditor": "Audit Agent",
+  "findings": [
+    {
+      "checklist_item_id": "RECV-001",
+      "rating": "PASS",
+      "evidence": "Measured 3 items from refrigerated delivery: 3.1°C, 3.8°C, 2.9°C — all within limit",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "RECV-002",
+      "rating": "PASS",
+      "evidence": "COAs present for all 4 high-risk item categories received today",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "RECV-003",
+      "rating": "PASS",
+      "evidence": "All packaging intact; 2 damaged cartons rejected and returned to supplier",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COLD-001",
+      "rating": "PASS",
+      "evidence": "Walk-in cooler #1: 3.2°C, Walk-in cooler #2: 3.8°C — both within limit",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COLD-002",
+      "rating": "PASS",
+      "evidence": "Freezer unit: -20.1°C — within limit",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COLD-003",
+      "rating": "OBSERVATION",
+      "evidence": "FIFO mostly practiced; found 3 cases of chicken breast with older date behind newer stock on shelf C2",
+      "notes": "Not a food safety hazard but rotation discipline should be reinforced with receiving staff"
+    },
+    {
+      "checklist_item_id": "COLD-004",
+      "rating": "FAIL",
+      "evidence": "HACCP-02 log reviewed: gap of 7.5 hours in temperature recording between 2:00 AM and 9:30 AM entries — exceeds 4-hour maximum requirement",
+      "notes": "Morning shift supervisor could not explain the gap; equipment datalogger confirms temperature stayed within range during this period, but documentation is non-conforming"
+    },
+    {
+      "checklist_item_id": "DRY-001",
+      "rating": "PASS",
+      "evidence": "All dry goods on shelving minimum 20cm off floor; no floor storage observed",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "DRY-002",
+      "rating": "PASS",
+      "evidence": "Chemicals in locked chemical storage room, separate from food storage area",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "DRY-003",
+      "rating": "PASS",
+      "evidence": "No evidence of pest activity; pest control service log current (last visit 2026-03-20)",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "PREP-001",
+      "rating": "PASS",
+      "evidence": "All 3 handwashing sinks: soap present, paper towels stocked, warm water operational",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "PREP-002",
+      "rating": "PASS",
+      "evidence": "Staff observed using color-coded boards correctly; red boards for raw poultry, green for vegetables",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "PREP-003",
+      "rating": "FAIL",
+      "evidence": "Sanitizer test: 150 ppm — below the 200 ppm requirement. Solution appeared diluted. Concentration strip test repeated twice with same result.",
+      "notes": "Sanitizer bucket had not been refreshed since start of shift (4+ hours). Staff were unaware of refreshing requirement."
+    },
+    {
+      "checklist_item_id": "COOK-001",
+      "rating": "PASS",
+      "evidence": "HACCP-01 log shows all 8 poultry batches reached ≥73.9°C. Spot check of current batch: 76.2°C",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COOK-002",
+      "rating": "PASS",
+      "evidence": "8 log entries match 8 batch records for today's production",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COOK-003",
+      "rating": "PASS",
+      "evidence": "Calibration log current; thermometer #1 calibrated 2026-03-22, thermometer #2 calibrated 2026-03-21 — both within 7-day window",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COOL-001",
+      "rating": "PASS",
+      "evidence": "HACCP-03 log: 3 batches cooled today. Batch 1: 60°C→21°C in 1h45m (pass), 21°C→4°C in 3h20m (pass). All within limits.",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "COOL-002",
+      "rating": "PASS",
+      "evidence": "Blast chiller display: -22°C during operation. Unit functional.",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "PACK-001",
+      "rating": "PASS",
+      "evidence": "HACCP-04 log: 14 test entries for today's 7-hour run. Fe 2mm, Non-Fe 2.5mm, SS 3mm all detected correctly on each test.",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "PACK-002",
+      "rating": "OBSERVATION",
+      "evidence": "5 label samples checked. 4 correct. 1 label missing 'Contains: SOY' allergen statement — however this was from a test run label, not in production use. Production labels are correct.",
+      "notes": "Recommend removing test labels from production area to prevent accidental use"
+    },
+    {
+      "checklist_item_id": "PACK-003",
+      "rating": "PASS",
+      "evidence": "Tree nut-containing product run completed at 6 AM; allergen changeover cleaning performed and verified. No simultaneous allergen lines running.",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "SHIP-001",
+      "rating": "PASS",
+      "evidence": "Measured 6 outbound cases: 2.8°C, 3.1°C, 3.4°C, 2.9°C, 3.0°C, 3.3°C — all within limit",
+      "notes": null
+    },
+    {
+      "checklist_item_id": "SHIP-002",
+      "rating": "PASS",
+      "evidence": "Transport vehicle pre-cooled to 2.1°C before loading commenced",
+      "notes": null
+    }
+  ],
+  "summary": {
+    "total_items": 23,
+    "pass": 18,
+    "fail": 2,
+    "observation": 2,
+    "na": 0
+  }
+}

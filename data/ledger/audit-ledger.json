@@ -1,0 +1,71 @@
+{
+  "ledger_version": "1.0",
+  "facility_id": "main-facility",
+  "audit_history": [
+    {
+      "audit_id": "AUD-2026-02-04",
+      "audit_date": "2026-02-04",
+      "audit_type": "routine",
+      "overall_result": "conditional-pass",
+      "findings_summary": {
+        "critical": 0,
+        "major": 2,
+        "minor": 1,
+        "observation": 3,
+        "pass": 17
+      },
+      "open_capas": 1,
+      "closed_capas": 2
+    },
+    {
+      "audit_id": "AUD-2026-02-25",
+      "audit_date": "2026-02-25",
+      "audit_type": "routine",
+      "overall_result": "pass",
+      "findings_summary": {
+        "critical": 0,
+        "major": 0,
+        "minor": 2,
+        "observation": 2,
+        "pass": 19
+      },
+      "open_capas": 0,
+      "closed_capas": 3
+    },
+    {
+      "audit_id": "AUD-2026-03-04",
+      "audit_date": "2026-03-04",
+      "audit_type": "routine",
+      "overall_result": "pass",
+      "findings_summary": {
+        "critical": 0,
+        "major": 0,
+        "minor": 1,
+        "observation": 1,
+        "pass": 21
+      },
+      "open_capas": 0,
+      "closed_capas": 1
+    },
+    {
+      "audit_id": "AUD-2026-03-25",
+      "audit_date": "2026-03-25",
+      "audit_type": "routine",
+      "overall_result": "conditional-pass",
+      "findings_summary": {
+        "critical": 0,
+        "major": 2,
+        "minor": 0,
+        "observation": 2,
+        "pass": 18
+      },
+      "open_capas": 2,
+      "closed_capas": 0
+    }
+  ],
+  "compliance_trend": {
+    "last_critical_finding": "2026-01-10",
+    "consecutive_passes": 2,
+    "average_major_per_audit_last_4": 1.0
+  }
+}

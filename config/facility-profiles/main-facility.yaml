@@ -1,0 +1,109 @@
+---
+facility_id: main-facility
+name: "Greenfield Food Processing — Main Facility"
+address: "1200 Industrial Blvd, Springfield, ST 00001"
+license_number: "FP-2024-00442"
+facility_type: food_processing
+product_types:
+  - ready_to_eat_meals
+  - cooked_poultry
+  - fresh_vegetables
+fda_registration: "14023456789"
+
+capacity:
+  employees_per_shift: 45
+  max_throughput_kg_per_day: 8000
+
+shifts:
+  - id: morning
+    start: "06:00"
+    end: "14:00"
+  - id: afternoon
+    start: "14:00"
+    end: "22:00"
+
+zones:
+  - id: receiving-dock
+    name: "Receiving Dock"
+    description: "Incoming raw materials, temperature verification, supplier documentation"
+    equipment:
+      - infrared_thermometer
+      - digital_scale
+      - dock_leveler
+    ccps: []
+
+  - id: cold-storage
+    name: "Cold Storage"
+    description: "Walk-in cooler and freezer units for raw and finished goods"
+    equipment:
+      - walk_in_cooler_unit_1
+      - walk_in_cooler_unit_2
+      - walk_in_freezer_unit_1
+      - temperature_dataloggers
+    ccps:
+      - CCP-COLD-STORAGE
+
+  - id: dry-storage
+    name: "Dry Storage"
+    description: "Ambient storage for dry goods, packaging materials, chemicals"
+    equipment: []
+    ccps: []
+
+  - id: prep-area
+    name: "Preparation Area"
+    description: "Vegetable washing, cutting, portioning"
+    equipment:
+      - commercial_sink_3_compartment
+      - cutting_boards_color_coded
+      - slicer_1
+    ccps: []
+
+  - id: cooking-station
+    name: "Cooking Station"
+    description: "Cooking ovens, grills, fryers — primary kill step for pathogens"
+    equipment:
+      - convection_oven_1
+      - convection_oven_2
+      - commercial_grill
+      - calibrated_thermometer_1
+      - calibrated_thermometer_2
+    ccps:
+      - CCP-COOK-TEMP
+
+  - id: cooling-area
+    name: "Rapid Cooling Area"
+    description: "Blast chiller for rapid cooling of cooked products"
+    equipment:
+      - blast_chiller_1
+      - temperature_probes_x4
+    ccps:
+      - CCP-RAPID-COOL
+
+  - id: packaging
+    name: "Packaging Line"
+    description: "Portioning, labeling, sealing, allergen segregation"
+    equipment:
+      - vacuum_sealer_1
+      - label_printer
+      - metal_detector
+    ccps:
+      - CCP-METAL-DETECT
+
+  - id: shipping-dock
+    name: "Shipping Dock"
+    description: "Outbound product staging and loading"
+    equipment:
+      - temperature_gun
+      - dock_door_seals
+    ccps: []
+
+contacts:
+  food_safety_manager:
+    name: "Maria Santos"
+    title: "Quality Assurance Manager"
+    phone: "555-0142"
+    email: "msantos@greenfieldfoods.example"
+  operations_manager:
+    name: "James Kowalski"
+    title: "Plant Operations Manager"
+    phone: "555-0143"
